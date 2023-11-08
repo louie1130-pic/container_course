@@ -2,11 +2,11 @@ version: "3.8"
 
 services:
   mariadb:
-    container_name: ${MARSQL_DEV_HOST}
+    container_name: ${MARSQL_HOST}
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${MARSQL_PASSWORD}
-      MYSQL_DATABASE: employeedb
+      MYSQL_DATABASE: ${MARSQL_DBNAME}
     networks:
       springboot-mysql-net:
   springboot-restful-webservices:
@@ -20,9 +20,9 @@ services:
       - mariadb
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - DB_HOST=${MARSQL_DEV_HOST}
-      - DB_PORT=${MARSQL_DEV_PORT}
-      - DB_NAME=${MARSQL_DEV_NAME}
+      - DB_HOST=${MARSQL_HOST}
+      - DB_PORT=${MARSQL_PORT}
+      - DB_NAME=${MARSQL_DBNAME}
       - DB_USER=${MARSQL_USER}
       - DB_PASSWORD=${MARSQL_PASSWORD} 
     networks:
