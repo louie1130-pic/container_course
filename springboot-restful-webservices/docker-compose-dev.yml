@@ -3,7 +3,7 @@ version: "3.8"
 services:
   mysqldb:
     container_name: ${MYSQL_DEV_HOST}
-    image: mysql
+    image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: dev
       MYSQL_DATABASE: employeedb
