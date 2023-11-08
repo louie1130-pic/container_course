@@ -20,8 +20,8 @@ services:
       - mysqldb
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - DB_USER=root
-      - DB_PASSWORD=dev  
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD} 
     networks:
       springboot-mysql-net:
     restart: on-failure
