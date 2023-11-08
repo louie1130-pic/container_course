@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  mysqldb:
+  mariadb:
     container_name: ${MYSQL_DEV_HOST}
     image: mariadb
     environment:
@@ -17,10 +17,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysqldb
+      - mariadb
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - ${MYSQL_DEV_HOST}
       - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD} 
     networks:
       springboot-mysql-net:
     restart: on-failure
