@@ -20,7 +20,7 @@ services:
       - mariadb
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - ${MYSQL_DEV_HOST}
+      - DB_HOST=${MYSQL_DEV_HOST}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD} 
     networks:
