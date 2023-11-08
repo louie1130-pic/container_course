@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
   mariadb:
-    container_name: ${MYSQL_DEV_HOST}
+    container_name: ${MARSQL_DEV_HOST}
     image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_ROOT_PASSWORD: ${MARSQL_PASSWORD}
       MYSQL_DATABASE: employeedb
     networks:
       springboot-mysql-net:
@@ -20,15 +20,17 @@ services:
       - mariadb
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - DB_HOST=${MYSQL_DEV_HOST}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD} 
+      - DB_HOST=${MARSQL_DEV_HOST}
+      - DB_PORT=${MARSQL_DEV_PORT}
+      - DB_NAME=${MARSQL_DEV_NAME}
+      - DB_USER=${MARSQL_USER}
+      - DB_PASSWORD=${MARSQL_PASSWORD} 
     networks:
       springboot-mysql-net:
     restart: on-failure
-    # volumes:
-    #   - m2:/root/.m2  
+    volumes:
+      - m2:/root/.m2  
 networks:
   springboot-mysql-net:
-# volumes:
-#   m2:
+volumes:
+  m2:
