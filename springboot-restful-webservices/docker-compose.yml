@@ -1,16 +1,16 @@
 version: "3.8"
 
 services:
-  mysqldb:
-    container_name: mysqldb
-    image: mysql
+  mariadb:
+    container_name: ${MARSQL_HOST}
+    image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: employeedb
+      MYSQL_ROOT_PASSWORD: ${MARSQL_PASSWORD}
+      MYSQL_DATABASE: ${MARSQL_DBNAME}
     networks:
       springboot-mysql-net:
     volumes:
-      - db:/var/lib/mysql
+      - db2:/var/lib/mysql #路徑固定     
   springboot-restful-webservices:
     container_name: springboot-restful-webservices
     build:
@@ -19,14 +19,21 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysqldb
+      - mariadb
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_HOST=${MARSQL_HOST}
+      - DB_PORT=${MARSQL_PORT}
+      - DB_NAME=${MARSQL_DBNAME}
+      - DB_USER=${MARSQL_USER}
+      - DB_PASSWORD=${MARSQL_PASSWORD} 
     networks:
       springboot-mysql-net:
     restart: on-failure
     volumes:
-      - m2:/root/.m2  
+      - m2:/root/.m2
 networks:
   springboot-mysql-net:
 volumes:
-  db:
+  db2:
   m2:
