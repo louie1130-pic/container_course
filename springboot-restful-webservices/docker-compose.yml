@@ -8,7 +8,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MARSQL_PASSWORD}
       MYSQL_DATABASE: ${MARSQL_DBNAME}
     networks:
-      springboot-mysql-net:
+      net1:
     volumes:
       - db2:/var/lib/mysql #路徑固定     
   springboot-restful-webservices:
@@ -28,12 +28,13 @@ services:
       - DB_USER=${MARSQL_USER}
       - DB_PASSWORD=${MARSQL_PASSWORD} 
     networks:
-      springboot-mysql-net:
+      net1:
     restart: on-failure
     volumes:
       - m2:/root/.m2
 networks:
-  springboot-mysql-net:
+  net1:
+    name: "springboot-restful-net"
 volumes:
   db2:
   m2:
