@@ -1,4 +1,5 @@
-FROM maven:3.8.2-eclipse-temurin-17 
+# Package stage
+FROM maven:3.8.2-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
@@ -14,3 +15,4 @@ WORKDIR /usr/local/lib
 COPY --from=build /app/target/springboot-restful-webservices-0.0.1-SNAPSHOT.jar springboot-restful-webservices.jar
 
 ENTRYPOINT ["java", "-jar", "springboot-restful-webservices.jar"]
+
