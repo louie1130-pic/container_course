@@ -1,5 +1,5 @@
 version: "3.8"
-
+name: project_springboot_volume
 services:
   mariadb:
     container_name: ${MARSQL_HOST}
@@ -9,15 +9,15 @@ services:
       MYSQL_DATABASE: ${MARSQL_DBNAME}
     networks:
       net1:
-    # volumes:
-    #   - db2:/var/lib/mysql #路徑固定     
+    volumes:
+      - dbv:/var/lib/mysql #路徑固定     
   springboot-restful-webservices:
     container_name: springboot-restful-webservices
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "${PORT}:8080"
+      - "8089:8080"
     depends_on:
       - mariadb
     environment:
@@ -36,5 +36,5 @@ networks:
   net1:
     name: "springboot-restful-net"
 volumes:
-  # db2:
+  dbv:
   m2:
