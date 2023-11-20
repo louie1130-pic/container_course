@@ -1,5 +1,5 @@
 version: "3.8"
-name: project_springboot_origin
+name: project_springboot_postgres
 services:
   db:
     container_name: postgres
@@ -9,8 +9,8 @@ services:
       POSTGRES_DB: employeedb
     networks:
       net1:
-    # volumes:
-    #   - db2:/var/lib/mysql #路徑固定 /var/lib/postgresql    
+    volumes:
+      - pdb:/var/lib/postgresql/data #路徑固定 /var/lib/postgresql/data Ref:https://hub.docker.com/_/postgres
   springboot-restful-webservices:
     container_name: springboot-restful-webservices
     build:
@@ -25,11 +25,11 @@ services:
     networks:
       net1:
     restart: on-failure
-    # volumes:
-    #   - m2:/root/.m2
+    volumes:
+      - m2:/root/.m2
 networks:
   net1:
     name: "springboot-restful-net"
-# volumes:
-#   db2:
-#   m2:
+volumes:
+  pdb:
+  m2:
