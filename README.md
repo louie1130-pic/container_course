@@ -1,27 +1,20 @@
-# springboot-docker-course
-Source code for Spring boot docker course/series
+# CMD STEP
 
-# Tutorials on Java Guides
-https://www.javaguides.net/2022/12/deploy-spring-boot-application-on-docker.html
+podman run --name mysqldb_dev  --network springboot-mysql-net -e MYSQL_ROOT_PASSWORD=dev -e MYSQL_DATABASE=employeedb -d mariadb
 
-https://www.javaguides.net/2022/12/deploy-spring-boot-mysql-application-to-docker.html
+podman build -t springboot-restful-webservices-multistage .
 
-https://www.javaguides.net/2022/12/spring-boot-mysql-docker-compose-example.html
+podman images --filter reference=envfile:yes 
 
-https://www.javaguides.net/2022/12/docker-container-commands.html
+podman exec -it mysqldb_dev bash
+mariadb -u root -p 
 
-https://www.javaguides.net/2022/12/docker-images-commands-list.html
+podman run -e "SPRING_PROFILES_ACTIVE=dev" --network springboot-mysql-net --name springboot-restful-webservices-multi-stage -p 8080:8080 springboot-restful-webservices
 
+podman compose -f .\docker-compose-origin.yml up -d
 
-MYSQL_ROOT_PASSWORD
-This variable is mandatory and specifies the password that will be set for the MySQL root superuser account. In the above example, it was set to my-secret-pw.
+podman compose -f .\docker-compose-env.yml up -d
 
-MYSQL_DATABASE
-This variable is optional and allows you to specify the name of a database to be created on image startup. If a user/password was supplied (see below) then that user will be granted superuser access (corresponding to GRANT ALL) to this database.
+podman compose -f .\docker-compose-volume.yml up -d
 
-
-docker-compose-volume.yml
-          # "Image": "84bc9437cea4c06982359de87c2947b941b113c506bc93f1c31863a3e474216b",
-          # "ImageDigest": "sha256:97e030479ffc7b0594a9b411850dcf6e7d6b5e7148f8ec6fe4f96e926cd44112",
-          # "ImageName": "docker.io/library/project_springboot_volume-springboot-restful-webservices:latest",
-
+podman compose -f .\docker-compose-postgresql.yml up -d
