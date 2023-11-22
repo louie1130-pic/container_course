@@ -1,5 +1,5 @@
 version: "3.8"
-#name: project_springboot_postgres
+name: project_springboot_postgres
 services:
   db:
     container_name: postgres
@@ -16,6 +16,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.posgres
+      tags:
+        - "springboot_postgres:latest"  
     ports:
       - "8091:8080"
     depends_on:

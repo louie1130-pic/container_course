@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn -f /app/pom_posgres.xml clean package -DskipTests
+RUN mvn -f /app/pom_postgres.xml clean package -DskipTests
 
 # Build stage
 FROM eclipse-temurin:17-jre-alpine

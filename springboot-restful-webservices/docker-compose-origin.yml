@@ -1,3 +1,4 @@
+#最初compose、未改寫環境變數之前
 version: "3.8"
 name: project_springboot_origin
 services:
@@ -16,6 +17,10 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+      tags:
+        - "db:mariadb"
+        - "volume:no"
+        - "envfile:no"        
     ports:
       - "8080:8080"
     depends_on:

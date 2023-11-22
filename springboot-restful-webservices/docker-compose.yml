@@ -16,8 +16,12 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+      tags:
+        - "db:mariadb"
+        - "volume:no"
+        - "envfile:yes"        
     ports:
-      - "${PORT}:8080"
+      - "8099:8080"
     depends_on:
       - mariadb
     environment:
