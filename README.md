@@ -18,3 +18,5 @@ podman compose -f .\docker-compose-env.yml up -d
 podman compose -f .\docker-compose-volume.yml up -d
 ## postgresql
 podman compose -f .\docker-compose-postgresql.yml up -d
+
+podman system prune --all --force && podman rmi --all
