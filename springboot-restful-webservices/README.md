@@ -1,6 +1,5 @@
-## minikube
-===
-### Basic
+## minikube(Basic)
+
 #### using podman build
 podman build -t docker.io/library/testmysqlcoon-springboot-restful-webservices-mini:v1.1 -f ./Dockerfile .
 #### check
@@ -27,6 +26,7 @@ SELECT database();
 SHOW TABLES;
 ```
 
-===
-### postegres
+
+## minikube(postegres)
+
 
