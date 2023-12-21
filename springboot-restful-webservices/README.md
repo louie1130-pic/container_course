@@ -97,6 +97,7 @@ minikube service springboot-restful-webservices-postgres --url
 kubectl exec -ti curlpod -- /bin/sh
 ### postman
 #### using JSON
+```
 [
     {
         "id": 1,
@@ -105,3 +106,4 @@ kubectl exec -ti curlpod -- /bin/sh
         "email": "minikube@gmail.com"
     }
 ]
+```
