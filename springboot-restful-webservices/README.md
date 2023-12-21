@@ -1,17 +1,17 @@
-## minikube(Basic)
-
+# minikube(Basic)
+## Build
 #### using podman build
 podman build -t docker.io/library/testmysqlcoon-springboot-restful-webservices-mini:v1.1 -f ./Dockerfile .
 #### check
 podman images "testmysqlcoon-springboot-restful-webservices-mini:v1.1"
 
-### import minikube
+## Import minikube
 #### tag必須要使用docker.io/library/ 否則會有錯誤
 minikube image load docker.io/library/testmysqlcoon-springboot-restful-webservices-mini:v1.1
 (option)minikube cache add localhost/springboot-restful-webservices-mini:v1.0
 
 
-### 進pod確認資料庫運行
+## 進pod確認資料庫運行
 #### container 內部用exec進行DB確認
 mariadb -u root -p 
 
@@ -27,6 +27,6 @@ SHOW TABLES;
 ```
 
 
-## minikube(postegres)
+# minikube(postegres)
 
 
