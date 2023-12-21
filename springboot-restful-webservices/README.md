@@ -59,10 +59,13 @@ minikube service spring-boot-app --url
 ## Build
 ### using podman build
 podman build -t docker.io/library/mini-springboot-restful-webservices-postgres:v0.2 -f ./Dockerfile.postgres .
+(option)docker build -t docker.io/library/mini-springboot-restful-webservices-postgres:v0.2 -f ./Dockerfile.postgres .
 
 ## import minikube
 ### import
 minikube image load docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
+minikube cache add docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
+
 ### check
 minikube image ls
 
@@ -83,9 +86,9 @@ kubectl run -it --rm --image=postgres:latest --restart=Never postgresql-client -
 mod image docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
 
 ### apply pod
-
+kubectl apply -f ./kompose_postgres/springboot-restful-webservices-pod.yaml
 ### apply service 
-
+kubectl apply -f ./kompose_postgres/springboot-restful-webservices-service.yaml
 ## 外部連入
 minikube service springboot-restful-webservices-postgres --url
 
