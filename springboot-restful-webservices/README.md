@@ -93,4 +93,14 @@ kubectl apply -f ./kompose_postgres/springboot-restful-webservices-service.yaml
 minikube service springboot-restful-webservices-postgres --url
 
 ## 測試工具
+### curl
 kubectl exec -ti curlpod -- /bin/sh
+### postman
+[
+    {
+        "id": 1,
+        "firstName": "Athena",
+        "lastName": "minikube",
+        "email": "minikube@gmail.com"
+    }
+]
