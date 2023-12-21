@@ -16,11 +16,12 @@ minikube image load docker.io/library/testmysqlcoon-springboot-restful-webservic
 mariadb -u root -p 
 
 #### 簡單mysql語法
+```
 SHOW DATABASES;
 USE employeedb;
 SELECT database();
 SHOW TABLES;
-
+```
 
 #### 另起臨時的pod遠端連線至DB
 kubectl run -it --rm --image=mysql:5.7 --restart=Never mysql-client -- mysql -u root -h mysqldb -p
