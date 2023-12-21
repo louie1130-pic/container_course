@@ -1,6 +1,6 @@
 ### minikube
 #### using podman build
-podman build -t docker.io/library/testmysqlcoon-springboot-restful-webservices-mini:v1.1 -f ./Dockerfile .
+  podman build -t docker.io/library/testmysqlcoon-springboot-restful-webservices-mini:v1.1 -f ./Dockerfile .
 #### check
 podman images "testmysqlcoon-springboot-restful-webservices-mini:v1.1"
 
