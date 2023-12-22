@@ -92,9 +92,11 @@ kubectl apply -f ./kompose_postgres/springboot-restful-webservices-service.yaml
 ## 外部連入
 minikube service springboot-restful-webservices-postgres --url
 
+
 ## 測試工具
 ### curl
 kubectl exec -ti curlpod -- /bin/sh
+
 ### postman
 #### using JSON
 ```
@@ -107,3 +109,6 @@ kubectl exec -ti curlpod -- /bin/sh
     }
 ]
 ```
+
+#### 查詢服務狀態
+kubectl get service  db -o jsonpath="{.status}" | jq

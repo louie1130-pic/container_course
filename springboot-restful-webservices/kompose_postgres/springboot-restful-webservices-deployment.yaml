@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f .\docker-compose-postgresql.yml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.network/springboot-restful-net: "true"
+    io.kompose.service: springboot-restful-app-postgres
+  name: springboot-restful-app-postgres
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      io.kompose.service: springboot-restful-app-postgres
+  template:
+    metadata:
+      labels:
+        io.kompose.service: springboot-restful-app-postgres
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: postgresql
+          image: docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
+          name: springboot-restful-app-postgres
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1 #最多一個pod新增
+          maxUnavailable: 1 #最多一個pod不可用
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f .\docker-compose-postgresql.yml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: springboot-restful-webservices
+  name: springboot-restful-webservices-postgres
+spec:
+  ports:
+    - name: "service-port-8091"
+      port: 8091
+      targetPort: 8080
+  type: NodePort      
+  selector:
+    io.kompose.service: springboot-restful-app-postgres
