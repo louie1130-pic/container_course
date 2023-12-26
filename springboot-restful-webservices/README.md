@@ -66,17 +66,9 @@ podman build -t docker.io/library/mini-springboot-restful-webservices-postgres:v
 minikube image load docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
 minikube cache add docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
 
-### check
+### check image是否匯入
 minikube image ls
 
-
-```
-psql -U postgres
-\list (=show database)
-\c employeedb (=use database)
-\dt列出table
-select * from users;
-```
 
 ### 另起臨時的pod遠端連線至DB
 kubectl run -it --rm --image=postgres:latest --restart=Never postgresql-client -- psql -h db -U postgres -d employeedb -W
@@ -111,7 +103,18 @@ kubectl exec -ti curlpod -- /bin/sh
 ]
 ```
 
+
+## 其他輔助指令
+
 #### 查詢服務狀態
 kubectl get service  db -o jsonpath="{.status}" | jq
 #### 查詢和service關聯的pod
 kubectl get ep green-service -o=jsonpath='{.subsets[*].addresses[*].ip}' | tr ' ' '\n' | xargs -I % kubectl get pods -o=name --field-selector=status.podIP=%
+#### postgres 常用指令
+```
+psql -U postgres
+\list (=show database)
+\c employeedb (=use database)
+\dt列出table
+select * from users;
+```
