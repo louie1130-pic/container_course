@@ -80,10 +80,10 @@ select * from users;
 
 ### 另起臨時的pod遠端連線至DB
 kubectl run -it --rm --image=postgres:latest --restart=Never postgresql-client -- psql -h db -U postgres -d employeedb -W
-kubectl run -it --rm --image=postgres:latest --restart=Never postgresql-client -- psql -h db -p 30432 -U postgres -d employeedb -W
+#kubectl run -it --rm --image=postgres:latest --restart=Never postgresql-client -- psql -h db -p 30432 -U postgres -d employeedb -W
 
 ## Apply
-mod image docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
+修改 image docker.io/library/mini-springboot-restful-webservices-postgres:v0.2
 
 ### apply pod
 kubectl apply -f ./kompose_postgres/springboot-restful-webservices-pod.yaml
@@ -95,6 +95,7 @@ minikube service springboot-restful-webservices-postgres --url
 
 ## 測試工具
 ### curl
+kubectl run --rm curl --image=radial/busyboxplus:curl -it
 kubectl exec -ti curlpod -- /bin/sh
 
 ### postman
@@ -112,3 +113,5 @@ kubectl exec -ti curlpod -- /bin/sh
 
 #### 查詢服務狀態
 kubectl get service  db -o jsonpath="{.status}" | jq
+#### 查詢和service關聯的pod
+kubectl get ep green-service -o=jsonpath='{.subsets[*].addresses[*].ip}' | tr ' ' '\n' | xargs -I % kubectl get pods -o=name --field-selector=status.podIP=%
